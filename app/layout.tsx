@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Flowbite, ThemeModeScript } from "flowbite-react";
+import AppLayout from "@/components/app-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +16,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <ThemeModeScript />
+      </head>
+      <body className={inter.className}>
+
+        <Flowbite>
+          <AppLayout>
+            {children}
+          </AppLayout>
+        </Flowbite>
+
+      </body>
     </html>
   );
 }
