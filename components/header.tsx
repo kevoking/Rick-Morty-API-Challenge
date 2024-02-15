@@ -33,8 +33,14 @@ export default function Header() {
                 )}
               </button>
               <Navbar.Brand href="/">
-                <h1 className="text-green-600 dark:text-green-300 font-extrabold text-2xl">
-                  R&M
+                <h1 className="text-green-600 dark:text-green-300 font-extrabold text-2xl h-10">
+                  <Image
+                    src="/logo-light.png"
+                    alt=""
+                    width="140"
+                    height="32"
+                    className="h-12"
+                   />
                 </h1>
               </Navbar.Brand>
             </div>
