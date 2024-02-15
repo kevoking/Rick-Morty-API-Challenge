@@ -18,11 +18,9 @@ export default function AppSidebar() {
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item>
-            Location 1
+            Graph QL
           </Sidebar.Item>
-          <Sidebar.Item>
-            Loc 2
-          </Sidebar.Item>
+          
         </Sidebar.ItemGroup>
       </Sidebar.Items>
 

@@ -2,7 +2,18 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, clone this repo
+```bash
+gh repo clone kevoking/Rick-Morty-API-Challenge
+```
+
+Inside the root folder run ```npm install``` to install all node packages required
+```bash
+cd Rick-Morty-API-Challenge
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev

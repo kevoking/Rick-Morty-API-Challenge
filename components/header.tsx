@@ -33,12 +33,9 @@ export default function Header() {
                 )}
               </button>
               <Navbar.Brand href="/">
-                <Image
-                  alt=""
-                  height="24"
-                  src="/next.svg"
-                  width="24"
-                />
+                <h1 className="text-green-600 dark:text-green-300 font-extrabold text-2xl">
+                  R&M
+                </h1>
               </Navbar.Brand>
             </div>
             <DarkThemeToggle />
