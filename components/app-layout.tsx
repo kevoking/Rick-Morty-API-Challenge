@@ -38,7 +38,7 @@ function AppLayoutContent({
         <>
             <Header />
             <div className="mt-16 flex items-start">
-                <AppSidebar />
+                {/* <AppSidebar /> */}
                 <div
                     id="main-content"
                     className={twMerge(
