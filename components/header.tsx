@@ -1,15 +1,8 @@
 'use client'
 import React from 'react'
-import { Bars3BottomLeftIcon } from '@heroicons/react/24/outline'
 import { DarkThemeToggle, Navbar } from 'flowbite-react'
-import Image from 'next/image'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { useSidebarContext } from '@/context/SidebarContext'
-import { isSmallScreen } from '@/helpers/is-small-screen'
 
 export default function Header() {
-
-  const { isCollapsed, setCollapsed } = useSidebarContext();
 
   return (
     <header>
@@ -20,18 +13,6 @@ export default function Header() {
         <div className="w-full p-3 pr-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <button
-                aria-controls="sidebar"
-                aria-expanded
-                className="mr-2 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
-                onClick={() => setCollapsed(!isCollapsed)}
-              >
-                {isCollapsed || !isSmallScreen() ? (
-                  <Bars3BottomLeftIcon className="h-6 w-6" />
-                ) : (
-                  <XMarkIcon className="h-6 w-6" />
-                )}
-              </button>
               <Navbar.Brand href="/">
                 <h1 className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 font-extrabold text-2xl py-1 flex flex-row flex-nowrap justify-center items-center content-center object-center drop-shadow-sm">
                   Rick<span className="text-lg px-2">And</span>Morty

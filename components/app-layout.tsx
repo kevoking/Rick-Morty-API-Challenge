@@ -1,9 +1,7 @@
 'use client'
 
-import { SidebarProvider, useSidebarContext } from '@/context/SidebarContext'
 import React from 'react'
 import Header from './header'
-import AppSidebar from './app-sidebar'
 import { twMerge } from 'tailwind-merge'
 import { CharacterDrawerProvider } from '@/context/CharacterDrawerContext'
 import CharacterDetailsDrawer from './character-details-drawer'
@@ -16,15 +14,13 @@ export default function AppLayout({
   }>) {
 
     return (
-        <SidebarProvider>
-            <CharacterListProvider>
-                <CharacterDrawerProvider>
-                    <AppLayoutContent>
-                        {children}
-                    </AppLayoutContent>
-                </CharacterDrawerProvider>
-            </CharacterListProvider>
-        </SidebarProvider>
+        <CharacterListProvider>
+            <CharacterDrawerProvider>
+                <AppLayoutContent>
+                    {children}
+                </AppLayoutContent>
+            </CharacterDrawerProvider>
+        </CharacterListProvider>
     )
 }
 
@@ -33,17 +29,16 @@ function AppLayoutContent({
   }: Readonly<{
     children: React.ReactNode;
   }>) {
-    const { isCollapsed } = useSidebarContext()
+
     return (
         <>
             <Header />
             <div className="mt-16 flex items-start">
-                {/* <AppSidebar /> */}
+
                 <div
                     id="main-content"
                     className={twMerge(
                         "relative h-full w-full overflow-y-auto bg-gray-50 dark:bg-gray-900",
-                        isCollapsed ? "lg:ml-16" : "lg:ml-64",
                     )}
                     >
                     {children}
