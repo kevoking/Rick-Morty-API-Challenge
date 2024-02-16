@@ -16,30 +16,30 @@ export default function CharacterDetailsContent({
     async function getCharacter() {
         const { data } = await client.query({
             query: gql`
-            query Character {
-                character(id: ${id}) {
-                    id
-                    name
-                    status
-                    species
-                    type
-                    gender
-                    origin {
+                query Character {
+                    character(id: ${id}) {
                         id
                         name
+                        status
+                        species
+                        type
+                        gender
+                        origin {
+                            id
+                            name
+                        }
+                        location {
+                            id
+                            name
+                        }
+                        image
+                        episode {
+                            id
+                            name              
+                        }
                     }
-                    location {
-                        id
-                        name
-                    }
-                    image
-                    episode {
-                        id
-                        name              
-                    }
-                }
-            }`,
-        })
+                }`,
+            })
     
         setCharacter(data.character)
     }

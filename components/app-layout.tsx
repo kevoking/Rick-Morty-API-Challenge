@@ -7,6 +7,7 @@ import AppSidebar from './app-sidebar'
 import { twMerge } from 'tailwind-merge'
 import { CharacterDrawerProvider } from '@/context/CharacterDrawerContext'
 import CharacterDetailsDrawer from './character-details-drawer'
+import { CharacterListProvider } from '@/context/CharacterListContext'
 
 export default function AppLayout({
     children,
@@ -16,11 +17,13 @@ export default function AppLayout({
 
     return (
         <SidebarProvider>
-            <CharacterDrawerProvider>
-                <AppLayoutContent>
-                    {children}
-                </AppLayoutContent>
-            </CharacterDrawerProvider>
+            <CharacterListProvider>
+                <CharacterDrawerProvider>
+                    <AppLayoutContent>
+                        {children}
+                    </AppLayoutContent>
+                </CharacterDrawerProvider>
+            </CharacterListProvider>
         </SidebarProvider>
     )
 }

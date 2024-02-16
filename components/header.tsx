@@ -33,14 +33,8 @@ export default function Header() {
                 )}
               </button>
               <Navbar.Brand href="/">
-                <h1 className="text-green-600 dark:text-green-300 font-extrabold text-2xl h-10">
-                  <Image
-                    src="/logo-light.png"
-                    alt=""
-                    width="140"
-                    height="32"
-                    className="h-12"
-                   />
+                <h1 className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 font-extrabold text-2xl py-1 flex flex-row flex-nowrap justify-center items-center content-center object-center drop-shadow-sm">
+                  Rick<span className="text-lg px-2">And</span>Morty
                 </h1>
               </Navbar.Brand>
             </div>
