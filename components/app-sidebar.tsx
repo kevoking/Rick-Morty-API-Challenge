@@ -17,12 +17,29 @@ export default function AppSidebar() {
 
       <Sidebar.Items>
         <Sidebar.ItemGroup>
+
           <Sidebar.Item>
             Graph QL
           </Sidebar.Item>
           
         </Sidebar.ItemGroup>
       </Sidebar.Items>
+
+      <Sidebar.CTA className={twMerge(
+        "mt-10 flex flex-col gap-y-2 divide-y divide-gray-300 dark:divide-white/25",
+        isCollapsed && "hidden"
+      )}>
+        <p className="text-xs">
+          Created with ❤️ by <span className="font-bold">Kelvin Mwangi</span>
+        </p>
+        <div className="flex flex-col gap-y-1">
+          <h4 className="text-sm font-semibold">Stack</h4>
+          <p>
+            React JS, NextJS, TypeScript, Tailwind CSS and GraphQL.
+          </p>
+        </div>
+        <p className="text-sm">Hosted on Vercel</p>
+      </Sidebar.CTA>
 
     </Sidebar>
   )

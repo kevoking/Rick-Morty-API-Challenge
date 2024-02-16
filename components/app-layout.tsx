@@ -5,6 +5,8 @@ import React from 'react'
 import Header from './header'
 import AppSidebar from './app-sidebar'
 import { twMerge } from 'tailwind-merge'
+import { CharacterDrawerProvider } from '@/context/CharacterDrawerContext'
+import CharacterDetailsDrawer from './character-details-drawer'
 
 export default function AppLayout({
     children,
@@ -14,9 +16,11 @@ export default function AppLayout({
 
     return (
         <SidebarProvider>
-            <AppLayoutContent>
-                {children}
-            </AppLayoutContent>
+            <CharacterDrawerProvider>
+                <AppLayoutContent>
+                    {children}
+                </AppLayoutContent>
+            </CharacterDrawerProvider>
         </SidebarProvider>
     )
 }
@@ -41,6 +45,7 @@ function AppLayoutContent({
                     >
                     {children}
                 </div>
+                <CharacterDetailsDrawer />
             </div>
         </>
     )
