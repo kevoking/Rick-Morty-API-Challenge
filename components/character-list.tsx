@@ -62,7 +62,7 @@ export default function CharactersListComponent ({ characters }: any) {
             {/*  */}
     
             <form 
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(() => {})}
               className="w-full flex flex-row justify-start items-center"> 
                 <div className="min-w-lg flex">  
                   <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -82,9 +82,9 @@ export default function CharactersListComponent ({ characters }: any) {
                     </button> */}
 
                     </div>
-                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    {/* <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                       Go
-                    </button>
+                    </button> */}
                   </div>
                   {errors.search && <span className="text-sm text-red-950 dark:text-red-800">Type something to search...</span>}
                 </div>
