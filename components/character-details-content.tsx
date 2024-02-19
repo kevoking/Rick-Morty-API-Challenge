@@ -1,3 +1,4 @@
+import { getNotes } from '@/components/notes'
 import createApolloClient from '@/lib/apollo-client'
 import { gql } from '@apollo/client'
 import { HeartIcon } from '@heroicons/react/24/solid'
@@ -52,27 +53,14 @@ export default function CharacterDetailsContent({
         setCharacter(data.character)
     }
 
-    async function getNotes() {
-
-        try {
-            const { rows } = await sql`SELECT * from rick_and_morty_char_notes where character_id=${id}`
-            setNotes(rows)
-        } catch (e: any) {
-            if (e.message.includes('relation "users" does not exist')) {
-              console.log(
-                'Table does not exist, creating and seeding it with dummy data now...'
-              )
-              
-            } else {
-              throw e
-            }
-        }        
-        
+    async function fetchNotes() {
+        const { data } = await getNotes()
+        console.log(data)
     }
 
     useEffect(() => {
         getCharacter()
-        getNotes()
+        fetchNotes()
     })
 
     if (loading == true) {
