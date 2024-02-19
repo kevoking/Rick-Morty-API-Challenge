@@ -1,6 +1,8 @@
 import createApolloClient from '@/lib/apollo-client'
 import { gql } from '@apollo/client'
 import { HeartIcon } from '@heroicons/react/24/solid'
+import { sql, QueryResultRow } from '@vercel/postgres'
+import { Spinner } from 'flowbite-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -11,13 +13,17 @@ export default function CharacterDetailsContent({
     id
 }: {id: string}) {
 
+    
     const [ character, setCharacter ] = useState(null)
+    const [ notes, setNotes ] = useState([] as QueryResultRow)
+    const [ loading, setLoading ] = useState(true)
 
     async function getCharacter() {
-        const { data } = await client.query({
+        setLoading(true)
+        const { data, loading } = await client.query({
             query: gql`
-                query Character {
-                    character(id: ${id}) {
+                query {
+                    character (id: ${id}) {
                         id
                         name
                         status
@@ -35,18 +41,34 @@ export default function CharacterDetailsContent({
                         image
                         episode {
                             id
-                            name              
+                            name
+                            episode
                         }
                     }
                 }`,
             })
     
+        setLoading(loading)
         setCharacter(data.character)
+    }
+
+    async function getNotes() {
+        const { rows } = await sql`SELECT * from rick_and_morty_char_notes where character_id=${id}`
+        setNotes(rows)
     }
 
     useEffect(() => {
         getCharacter()
+        getNotes()
     })
+
+    if (loading == true) {
+        return (<>
+            <div className="flex justify-center items-center">
+                <Spinner />
+            </div>
+        </>)
+    }
 
     return (
         <>
@@ -87,7 +109,21 @@ export default function CharacterDetailsContent({
                         <dt className="mb-1 text-gray-500 text-sm dark:text-gray-400">Species</dt>
                         <dd className="text-md">{character['species']}</dd>
                     </div>
+                    <div className="flex flex-col py-2">
+                        <dt className="mb-1 text-gray-500 text-sm dark:text-gray-400">Episode</dt>
+                        <dd className="text-md">{character['episode']['episode'] ?? 'Not Available'}</dd>
+                    </div>
                 </dl>
+
+                <div>{id}
+                    <div>
+                        {notes.map((note: QueryResultRow) =>
+                            (<div key={note.id}>
+                                <p>{note.note}</p>
+                            </div>)
+                        )}
+                    </div>
+                </div>
 
             </div>}
         </>

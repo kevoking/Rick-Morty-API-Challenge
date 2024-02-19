@@ -1,46 +1,57 @@
 
 import CharactersListComponent from "@/components/character-list";
-import LocationsListComponent from "@/components/location-list";
+import LocationsListContent from "@/components/location-list-content";
 import createApolloClient from "@/lib/apollo-client";
 import { gql } from "@apollo/client";
 
 const client = createApolloClient()
 
+const GRAPH = gql`
+query {
+  characters {
+    results {
+      id
+      name
+      status
+      species
+      type
+      gender
+      origin {
+        id
+        name
+      }
+      location {
+        id
+        name
+      }
+      image
+      episode {
+        id
+        name
+        episode
+      }
+    }
+  }
+  locations {
+    results {
+      id
+      name
+      type
+      dimension
+    }
+  }
+}
+`
+
 export default async function Home() {
   const { data } = await client.query({
-    query: gql`
-      query Characters {
-        characters {
-          results {
-            id
-            name
-            status
-            species
-            type
-            gender
-            origin {
-              id
-              name
-            }
-            location {
-              id
-              name
-            }
-            image
-            episode {
-              id
-              name              
-            }
-          }
-        }
-      }
-    `,
+    query: GRAPH,
   })
   return (
       <>
         <div className="min-h-[calc(100vh-theme('spacing.16'))] w-full flex flex-row flex-nowrap">
           {/*  */}
-          <LocationsListComponent />
+          {data && <LocationsListContent locations={data.locations.results} />}
           <div className="w-full md:ml-80">
             {/*  */}
             {data && <CharactersListComponent characters={data.characters.results} />}
@@ -49,4 +60,3 @@ export default async function Home() {
       </>
   );
 }
-
