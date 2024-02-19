@@ -53,8 +53,21 @@ export default function CharacterDetailsContent({
     }
 
     async function getNotes() {
-        const { rows } = await sql`SELECT * from rick_and_morty_char_notes where character_id=${id}`
-        setNotes(rows)
+
+        try {
+            const { rows } = await sql`SELECT * from rick_and_morty_char_notes where character_id=${id}`
+            setNotes(rows)
+        } catch (e: any) {
+            if (e.message.includes('relation "users" does not exist')) {
+              console.log(
+                'Table does not exist, creating and seeding it with dummy data now...'
+              )
+              
+            } else {
+              throw e
+            }
+        }        
+        
     }
 
     useEffect(() => {

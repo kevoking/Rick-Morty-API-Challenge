@@ -5,7 +5,6 @@ import { Sidebar } from 'flowbite-react'
 import React from 'react'
 import { twMerge } from 'tailwind-merge'
 import CharacterDetailsContent from './character-details-content'
-import { gql } from '@apollo/client'
 
 export default function CharacterDetailsDrawer() {
   const { selectedCharacterId, isCharacterDrawerCollapsed, setCharacterDrawerCollapsed } = useCharacterDrawerContext()
