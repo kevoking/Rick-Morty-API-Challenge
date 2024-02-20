@@ -1,6 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+#### Demo
+
+[Rick and Morty](https://rick-morty-beta-two.vercel.app/)
+This app is hosted on [Vercel](https://vercel.com/)
+
 ### Technologies used
+
 - [Next JS](https://nextjs.org/)
 - [react-hook-form](https://react-hook-form.com/)
 - [ApolloClient](https://www.apollographql.com/) for graphql
