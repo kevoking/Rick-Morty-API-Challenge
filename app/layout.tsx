@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import "dotenv/config"
 import "./globals.css";
 import { Flowbite, ThemeModeScript } from "flowbite-react";
 import AppLayout from "@/components/app-layout";

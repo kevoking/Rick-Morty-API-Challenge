@@ -3,6 +3,11 @@
 import type { FC, PropsWithChildren } from "react";
 import { createContext, useContext, useState } from "react";
 
+/**
+ * context api to manage state for viewing charatcter details
+ * selectedCharacterId: this is the id of the currently selected character
+ * isCharacterDrawerCollapsed: show or hide the character details screen which shows as a drawer
+ */
 interface CharacterDrawerContextProps {
   selectedCharacterId: string;
   setSelectedCharacterId: (id: string) => void;

@@ -2,6 +2,7 @@
 import React from 'react'
 import { DarkThemeToggle, Navbar } from 'flowbite-react'
 
+// fixed header for aour app
 export default function Header() {
 
   return (

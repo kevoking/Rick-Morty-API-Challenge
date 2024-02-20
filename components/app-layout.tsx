@@ -7,6 +7,7 @@ import { CharacterDrawerProvider } from '@/context/CharacterDrawerContext'
 import CharacterDetailsDrawer from './character-details-drawer'
 import { CharacterListProvider } from '@/context/CharacterListContext'
 
+// this layout injects our context api state management into the app
 export default function AppLayout({
     children,
   }: Readonly<{

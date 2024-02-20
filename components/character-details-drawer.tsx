@@ -6,8 +6,21 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge'
 import CharacterDetailsContent from './character-details-content'
 
+/**
+ * Character details drawer
+ * @returns react component: drawer
+ */
 export default function CharacterDetailsDrawer() {
-  const { selectedCharacterId, isCharacterDrawerCollapsed, setCharacterDrawerCollapsed } = useCharacterDrawerContext()
+
+  // context api state management
+  const { selectedCharacterId, setSelectedCharacterId, isCharacterDrawerCollapsed, setCharacterDrawerCollapsed } = useCharacterDrawerContext()
+
+  // close the drawer
+  function closeDrawer() {
+    // reset the selected character id before closing the drawer
+    setSelectedCharacterId("")
+    setCharacterDrawerCollapsed(true)
+  }
 
   return (
     <>
@@ -20,9 +33,9 @@ export default function CharacterDetailsDrawer() {
               )}
           >
             <div className={twMerge(
-              "fixed top-0 right-0 left-0 bottom-0 bg-black/75 blur-xl -z-10",
+              "fixed top-0 right-0 left-0 bottom-0 bg-black/75 -z-10",
               isCharacterDrawerCollapsed && "hidden w-0",
-            )} onClick={() => setCharacterDrawerCollapsed(!isCharacterDrawerCollapsed)}></div>
+            )} onClick={() => closeDrawer()}></div>
             <div className={twMerge(
               "fixed top-0 right-0 h-20 p-4 z-40 flex",
               isCharacterDrawerCollapsed && "hidden w-0",
@@ -31,7 +44,7 @@ export default function CharacterDetailsDrawer() {
                   <button
                     type="button" 
                     className="p-2"
-                    onClick={() => setCharacterDrawerCollapsed(!isCharacterDrawerCollapsed)}
+                    onClick={() => closeDrawer()}
                   >
                     <XMarkIcon className="h-8 w-8 text-gray-600 dark:text-gray-300" />
                   </button>

@@ -6,6 +6,9 @@ import { gql } from "@apollo/client";
 
 const client = createApolloClient()
 
+/**
+ * graph query to get charaters and locations
+ */
 const GRAPH = gql`
 query {
   characters {
@@ -44,6 +47,8 @@ query {
 `
 
 export default async function Home() {
+
+  // get data from our graphql end-point
   const { data } = await client.query({
     query: GRAPH,
   })
@@ -60,3 +65,4 @@ export default async function Home() {
       </>
   );
 }
+

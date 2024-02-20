@@ -1,16 +1,17 @@
 'use client'
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
+import { GlobeEuropeAfricaIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import { twMerge } from "tailwind-merge"
 import {  useCharacterDrawerContext } from "@/context/CharacterDrawerContext"
-import { HeartIcon } from "@heroicons/react/24/solid"
+import { HeartIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import { useCharacterListContext } from "@/context/CharacterListContext"
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 type FilterInputs = {
-  search: string
+  search: string,
+  location: string | null
 }
 /**
  * A list of characters
@@ -19,7 +20,14 @@ type FilterInputs = {
 export default function CharactersListComponent ({ characters }: any) {
   
     const { isCharacterDrawerCollapsed, setCharacterDrawerCollapsed, setSelectedCharacterId } = useCharacterDrawerContext()
-    const { selectedLocationId, setSelectedLocationId } = useCharacterListContext()
+    const {
+      selectedLocationId,
+      selectedLocationName,
+      showLocationDrawer,
+      setShowLocationDrawer,
+      setSelectedLocationId,
+      setSelectedLocationName
+    } = useCharacterListContext()
 
     const [ filteredCharacters, setFilteredCharacters ] = useState(characters)
 
@@ -31,6 +39,11 @@ export default function CharactersListComponent ({ characters }: any) {
     } = useForm()
 
     const searchQuery = watch("search")
+
+    function clearLocationFilter() {
+      setSelectedLocationId("")
+      setSelectedLocationName("")
+    }
 
     const onSubmit: SubmitHandler<FilterInputs> = (data) => {
       //
@@ -63,11 +76,11 @@ export default function CharactersListComponent ({ characters }: any) {
     
             <form 
               onSubmit={handleSubmit(() => {})}
-              className="w-full flex flex-row justify-start items-center"> 
-                <div className="min-w-lg flex">  
+              className="w-full grid grid-cols-1 gap-y-2 md:flex md:flex-row md:space-x-4 justify-start items-center"> 
+                <div className="w-full flex flex-col">  
                   <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                  <div className="flex flex-row flex-nowrap space-x-4 justify-start items-center">
-                    <div className="relative">
+                  <div className="w-full flex flex-row flex-nowrap space-x-4 justify-start items-center">
+                    <div className="relative w-full">
                       <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <MagnifyingGlassIcon className="h-4 w-4" />
                       </div>
@@ -75,18 +88,45 @@ export default function CharactersListComponent ({ characters }: any) {
                         {...register("search")}
                         type="search" 
                         id="default-search" 
-                        className="block w-full p-2 ps-10 pe-14 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Character, Episode..." 
+                        className="block w-full max-w-md p-2 ps-10 pe-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Character name, Episode..." 
                       />
-                      {/* <button type="submit" className="text-white absolute end-0 bottom-0.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                      Go
-                    </button> */}
-
+                      
                     </div>
-                    {/* <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                      Go
-                    </button> */}
+                    
                   </div>
                   {errors.search && <span className="text-sm text-red-950 dark:text-red-800">Type something to search...</span>}
+                </div>
+                <div className="w-full max-w-md flex flex-col md:hidden">  
+                  <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Location</label>
+                  <div className="w-full flex flex-row flex-nowrap space-x-4 justify-start items-center">
+                    <div className="relative w-full">
+                      <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <GlobeEuropeAfricaIcon className="h-4 w-4" />
+                      </div>
+                      
+                      <div className="flex flex-row flex-nowrap justify-between items-center space-x-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <button
+                          type="button"
+                          onClick={() => setShowLocationDrawer(!showLocationDrawer)}
+                          className="w-full p-2 ps-10 text-sm  text-left" 
+                        >
+                          <span>{
+                            selectedLocationName != "" ?
+                              selectedLocationName : "Select Location"
+                          }</span>
+                        </button>
+                        { selectedLocationName != "" && <button
+                          type="button"
+                          onClick={() => clearLocationFilter()}
+                          className="p-2 text-sm" 
+                        >
+                          <XMarkIcon className="h-4 w-4" />
+                        </button>}
+                      </div>
+                      
+                    </div>
+                    
+                  </div>
                 </div>
             </form>
     
@@ -96,7 +136,7 @@ export default function CharactersListComponent ({ characters }: any) {
             {filteredCharacters.map((character: any) => 
               <div 
                 key={character['id']} 
-                className="bg-gray-100 dark:bg-gray-800 col-span-1 rounded-md shadow-md h-64" 
+                className="bg-gray-100 dark:bg-gray-800 col-span-1 rounded-md shadow-md h-64 cursor-pointer" 
                 onClick={() => selectCharacter(character['id'])}
               >
                 <div className="flex flex-col justify-between items-start gap-y-1">
