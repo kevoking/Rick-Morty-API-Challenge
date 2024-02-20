@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+### Technologies used
+- [Next JS](https://nextjs.org/)
+- [react-hook-form](https://react-hook-form.com/)
+- [ApolloClient](https://www.apollographql.com/) for graphql
+- [Firebase](https://firebase.google.com/) RealTime Database for data persistence
+- [Tailwind CSS](https://tailwindcss.com/)
+- Deployed on [Vercel](https://vercel.com/)
+
 ## Getting Started
 
 First, clone this repo
@@ -12,6 +20,8 @@ Inside the root folder run ```npm install``` to install all node packages requir
 cd Rick-Morty-API-Challenge
 npm install
 ```
+
+Copy ```.env.example``` to ```.env.local``` and fill in your firebase creditials
 
 Run the development server:
 
